@@ -48,7 +48,7 @@ int main()
     return 0;
 }
 
-C++ 과제 --> https://canvas.donga.ac.kr/courses/72047/external_tools/2 (3장 확인문제 4번)
+C++ 과제 --> (3장 확인문제 4번)
 
 #include <iostream>
 using namespace std;
