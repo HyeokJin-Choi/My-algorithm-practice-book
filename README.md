@@ -47,3 +47,78 @@ int main()
     }
     return 0;
 }
+
+C++ 과제 --> https://canvas.donga.ac.kr/courses/72047/external_tools/2 (3장 확인문제 4번)
+
+#include <iostream>
+using namespace std;
+class ThreeMatrices {
+    int a[3][5] = { {5,10,2,7,5},{4,6,2,2,9},{1,9,2,8,4} };
+    int b[3][5] = { {5,2,7,4,5},{10,6,9,2,3},{2,6,4,7,1} };
+    int c[3][5];
+public:
+    ThreeMatrices(); //기본 생성자 선언
+    void printC(); //멤버함수 선언
+    void biggerC(); //""
+    void smallerC(); //""
+};
+
+ThreeMatrices::ThreeMatrices() {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            c[i][j] = 0;
+        }
+    }
+} //생성자 c배열 0으로 초기화
+void ThreeMatrices::printC() {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 5; j++) {
+            cout << c[i][j] << " ";
+        } // 0 0 0 0 0 형태로 나타냄
+        cout << endl;
+    } // 첫 번 째 배열 값을 다 채운 후 한 줄 띄우고 채우기
+} // void를 사용한 이유는 리턴을 통해서 반환할 값이 없기 때문
+void ThreeMatrices::biggerC() { 
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 5; j++) {
+                if (a[i][j] < b[i][j]) {
+                    c[i][j] = b[i][j];
+                } 
+                else {
+                    c[i][j] = a[i][j];
+                }
+
+            }
+        }
+} //배열의 값들을 비교하여 더 큰 값을 c배열에 저장
+
+void ThreeMatrices::smallerC() {
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 5; j++) {
+            if (a[i][j] > b[i][j]) {
+                c[i][j] = b[i][j];
+            }
+            else {
+                c[i][j] = a[i][j];
+            }
+
+        }
+    }
+} // 배열의 값들을 비교하여 더 작은 값을 c배열에 저장
+
+int main()
+{
+    ThreeMatrices m;
+    cout << "initail..." << endl;
+    m.printC(); // 생성자 함수를 통해 0값으로 초기화 된 값을 멤버함수 printC에 지정된 배열 방식으로 나타냄.
+    cout << "bigger..." << endl;
+    m.biggerC(); // 멤버함수 biggerC의 계산 방식으로 멤버 변수 int a[3][5]와 int b[3][5]를 비교하여 int c[3][5]에 값을 저장함.
+    m.printC(); // 멤버함수 biggerC의 계산 방식으로 멤버 변수 int c[3][5]에 값을 저장된 값들을 printC에 지정된 배열 방식으로 나타냄.
+    cout << "smaller..." << endl;
+    m.smallerC(); // 멤버함수 smallerC의 계산 방식으로 멤버 변수 int a[3][5]와 int b[3][5]를 비교하여 int c[3][5]에 값을 저장함.
+    m.printC(); // 멤버함수 smallerC의 계산 방식으로 멤버 변수  int c[3][5]에 값을 저장된 값들을 printC에 지정된 배열 방식으로 나타냄.
+
+    return 0;
+}
