@@ -156,3 +156,58 @@ int main()
 	cout << "myline의 길이는 " << myline.getLineLength() << "입니다. \n";
 	return 0;
 }
+
+아직해결하지 못한 백준 문제 --> 1406번 // https://www.acmicpc.net/status?user_id=chlgurwls4585&problem_id=1406&from_mine=1
+현재 진행 ↓
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	cin.tie(0); ios_base::sync_with_stdio(false); cout.tie(0); //할당돤 시간 줄여주기
+	string editor = ""; //입력받을 단어 넣는 공간 초기화 해주기
+	string choose = ""; //옵션받을 단어 넣는 공간 초기화 해주기
+	string P = ""; //옵션이 P로 받았다면 그에 맞는 추가 될 단어 넣는 공간 초기화 해주기
+	int count = 0; //옵션을 몇 번 넣을 지 정해주는 숫자갑 받는 공간 초기화 해주기
+	cin >> editor; //단어 입력받기
+	int couser = editor.length(); // 커서라는 변수를 선언하여 마치 커서처럼 움직임을 나타내기
+	cin >> count; //몇 번 넣을 지 입력받기
+	for (int i = 0; i < count; i++) //입력받은 횟수만큼 반복~
+	{
+		cin >> choose; //옵션으로 받을 단어 입력받기
+		if (choose == "L") {
+			couser--;
+			if (couser <= 0) {
+				couser = 0;
+			}
+		}  // L선택 시 커서는 왼쪽으로 움직여 주기. 그것을 couser--;로 표현. 하지만 맨 앞이라면 커서는 0의 값
+		else if (choose == "D") {
+			couser++;
+			if (couser >= editor.length()) {
+				couser = editor.length();
+			}  // D선택 시 커서는 오른쪽으로 움직여 주기. 그것을 couser++;로 포현. 하지만 맨 뒤라면 커서는 맨 처음에
+			  // 넣은 단어의 길이 이상으로 넘어가지 않음
+		}
+		else if (choose == "B") {
+			if (couser != 0) editor.erase(couser - 1, 1);
+			couser--;
+			if (couser <= 0) {
+				couser = 0;
+			} // B선택 시 현재 커서의 위치에 있는 단어를 삭제후 couser--;로 커서를 왼쪽으로 움직여 주기.--> 단어를
+			 //삭제하더라도 커서는 움직이지 않기 때문. 삭제후 움진인 커서가 맨 앞이라면 couser에 0의 값
+		}
+		else if (choose == "P") {
+			cin >> P;
+			editor.insert(couser, P);
+			couser++;
+			if (couser >= editor.length()) {
+				couser = editor.length();
+			} // P선택 시 현재 커서의 위치에 더 입력받은 단어를 추가후 couser++;로 커서를 오른쪽으로 움직여 주기. -->
+			 //추가하더라도 커서는 움직이지 않기 때문. 추가후 움직인 커서가 맨 뒤라면 커서는 맨 처음에 넣은 단어의 길
+			//이 이상으로 넘어가지 않음
+		}
+	}
+	cout << editor;
+	return 0;
+}
