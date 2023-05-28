@@ -214,4 +214,5 @@ int main()
 
 //int 동아리 과제 
 짝수와 홀수 문제
-https://app.code2flow.com/JnOWRD
+https://app.code2flow.com/JnOWRD (1) <-- 사람들이 해결한 방법
+https://app.code2flow.com/YvwU6Z (2) <--내가 직접 해결
