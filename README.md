@@ -213,6 +213,57 @@ int main()
 }
 
 //int 동아리 과제 
-짝수와 홀수 문제
-https://app.code2flow.com/JnOWRD (1) <-- 사람들이 해결한 방법
+<짝수와 홀수 문제>
+https://app.code2flow.com/JnOWRD (1) <-- 사람들이 해결한 방법 + 나의 고안
 https://app.code2flow.com/YvwU6Z (2) <--내가 직접 해결
+
+<숫자짝꿍>
+https://app.code2flow.com/Oz50KGUfbiYi 
+좀 복잡할 듯 하여 코드도 같이 ->
+
+#include <vector>
+#include <string>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+string solution(string X, string Y) {
+    string answer = "";
+    vector<int> X_int(X.size()); // X의 정수 배열을 담을 벡터 선언 -> 벡터의 크기는 기존의 string X 배열의 크기 그대로!
+    vector<int> Y_int(Y.size()); // Y의 정수 배열을 담을 벡터 선언 -> 벡터의 크기는 기존의 string Y 배열의 크기 그대로!
+
+    for (int i = 0; i < X.size(); i++) { //X배열의 크기(길이)만큼 반복
+        X_int[i] = X[i] - '0'; // X의 문자를 정수로 변환하여 X_int에 저장! -> -'0'을 해줌으로써 0의 아스키코드 값인 48을 빼주는 것과 동일! 따라서 X의 문자를 정수로 변환하는 과정! 값은 0-9까지 나온다~ 우리가 입력할 값 자체가 각 자리에 0-9사이의 숫자를 입력하므로~~
+    }
+    for (int i = 0; i < Y.size(); i++) { //Y배열의 크기(길이)만큼 반복
+        Y_int[i] = Y[i] - '0'; // Y의 문자를 정수로 변환하여 Y_int에 저장!
+    }
+
+    // 각 정수를 받을 벡터들을 내림차순으로 정렬
+    sort(X_int.begin(), X_int.end(), greater<int>());
+    sort(Y_int.begin(), Y_int.end(), greater<int>());
+
+    int Xcount = 0, Ycount = 0; //각각 X_int와 Y_int의 index역할을 수행!
+
+    while (Xcount < X.size() && Ycount < Y.size()) { //내림차순으로 정렬이 다 되어있는 X_int와 Y_int의 배열에서 짝꿍을 찾기위한 과정 시작! -> X_int배열과 Y_int의 배열이 각각 X,Y의 배열 길이를 초과할 시 반복문 종료. 각각 Xcount <= X.size()-1의 조건으로는 변경 가능 -> Xcount와 Ycount는 각 배열의 index값이기 때문 
+        if (X_int[Xcount] == Y_int[Ycount]) { //X_int와Y_int의 값이 같을 때
+            answer += to_string(X_int[Xcount]); // 정수를 문자열로 변환하여 answer에 추가 -> X_int든 Y_int든 두 값이 같기 때문에 Y_int[Ycount]로 수정해도 같다!
+            Xcount++; 
+            Ycount++; //다음 대상을 찾기위한 과정~
+        } else if (X_int[Xcount] < Y_int[Ycount]) { //내림차순으로 정렬이 되어 있기에 X_int의 Xcount번 째의 값이 Y_int의 Ycount번 째의 값보다 작을 시 X_int의 Xcount번 째의 원소값이 Y_int의 배열에 존재하지 않음
+            Ycount++; //Ycount를 1 증가시켜, 다시 비교하기 위함
+        } else {
+            Xcount++; //Y_int의 Ycount번 째의 원소 값이 더 작다면 Xcount를 1 증가 시켜서 다시 비교~
+        }
+    }
+
+    if (answer.empty()) { //결과를 도출할 string형 변수 answer가 비었을 시 -1 도출
+        answer = "-1";
+    } else if (answer[0] == '0') { //결과를 도출할 string형 변수 answer의 첫번째 원소가 0일시 0 도출 -> 정렬을 다 하고 계산을 다 했는데, 첫번째 원소가 0이라는 뜻은 뒤에 뭐가 오든지 다 0임
+        answer = "0";
+    }
+
+    return answer; //짝꿍을 찾아서 나타낼 수 있는 가장 큰 수로 도출!
+}
+
