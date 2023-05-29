@@ -220,7 +220,7 @@ https://app.code2flow.com/YvwU6Z (2) <--내가 직접 해결
 <숫자짝꿍>
 https://app.code2flow.com/Oz50KGUfbiYi 
 좀 복잡할 듯 하여 코드도 같이 ->
-
+/*
 #include <vector>
 #include <string>
 #include <iostream>
@@ -266,4 +266,5 @@ string solution(string X, string Y) {
 
     return answer; //짝꿍을 찾아서 나타낼 수 있는 가장 큰 수로 도출!
 }
+	*/
 
